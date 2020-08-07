@@ -1,25 +1,9 @@
 %{
-  #include <stdio.h>
-  #include <string.h>
-  #include <time.h>
-  #include <windows.h>
-  #include <stdbool.h>
+  #include "tabla_de_valores.h"
 
   extern FILE*yyin;
   extern int yylex(void);
   extern void yyerror(char*);
-  
-  typedef struct nodoVar repositorioDeVariables;
-  typedef struct nodoVar entradaDeTabla;
-
-  entradaDeTabla* findEntrada(char*identificador, repositorioDeVariables*);
-
-  void declararVariable(char*identificador, int valor, repositorioDeVariables**);
-  void asignarVariable(char*identificador, int nuevoValor, repositorioDeVariables**);
-  void leer(char*identificador, repositorioDeVariables*);
-
-  int obtenerValor(char*identificador, repositorioDeVariables*);
-  int operar(int operando, short signo, int otroOperando);
   
   repositorioDeVariables* tablaDeValores = NULL;
 
@@ -88,90 +72,6 @@ int main(int argc, char*argv[]){
   printf(">> Gracias por confiar en nosotros, tenga un buen dia!\n*****************************************************************\n"); 
   Sleep(1.5*1000);
   return 0;
-}
-
-//**************************************************** Funciones Declaradas ********************************************************************
-
-//variable
-typedef struct{
-  char* nombre;
-  int valor;
-} variable;
-
-variable variableCreate(char* identificador, int valor){
-	return (variable){identificador, valor};
-}
-
-//Historial de variables almacenadas implementado en una pila
-typedef struct nodoVar{
-	variable info;
-	struct nodoVar* sig;
-} nodoVariable;
-
-void addVariable(variable var, repositorioDeVariables** tabla){
-	entradaDeTabla* nuevaEntrada = malloc(sizeof(entradaDeTabla));
-	nuevaEntrada->info = var;
-	nuevaEntrada->sig = *tabla;
-	*tabla = nuevaEntrada;
-}
-
-bool hayMasVariables(repositorioDeVariables* almacen){
-	return almacen!=NULL;
-}
-
-entradaDeTabla* findEntrada(char*identificador, repositorioDeVariables* tabla){
-	while(hayMasVariables(tabla))
-	{
-		if(!strcmp(tabla->info.nombre, identificador))
-		{
-			return tabla;
-		}
-			
-		tabla = tabla->sig;			
-	}
-	
-	return NULL;
-}
-
-variable* getVariable(char*identificador, repositorioDeVariables* almacen){
-	entradaDeTabla* entrada = findEntrada(identificador, almacen);
-	return entrada? &(entrada->info) : NULL;
-}
-
-//Mis funciones
-
-void declararVariable(char*identificador, int valor, repositorioDeVariables**tablaDeValores){
-//	if(!findEntrada(identificador, *tablaDeValores)) //
-//	{
-		variable nuevaVariable = variableCreate(identificador, valor);
-		addVariable(nuevaVariable, tablaDeValores); // <-- \ o / es horrible pero la profe dijo que era asi
-//	}
-}
-
-void asignarVariable(char*identificador, int nuevoValor, repositorioDeVariables**tablaDeValores){
-	variable* var = getVariable(identificador, *tablaDeValores);
-	
-	if(var)	var->valor=nuevoValor;
-	
-	else declararVariable(identificador, nuevoValor, tablaDeValores);
-}
-
-int obtenerValor(char*identificador, repositorioDeVariables* tablaDeValores){
-	variable*unaVariable=getVariable(identificador, tablaDeValores);
-	return unaVariable? unaVariable->valor : 0;
-}
-
-void leer(char*identificador, repositorioDeVariables* almacen){
-	variable* variableDeLectura = getVariable(identificador, almacen);
-	if(variableDeLectura){
-		printf(">>  %s = %d\n", variableDeLectura->nombre, variableDeLectura->valor);
-	}
-	else printf(">>  El identificador %s no responde a ninguna variable\n", identificador);
-}
-
-int operar(int operando, short signo, int otroOperando){
-	printf("--  Se resolvera %d+%d*%d\n", operando, signo, otroOperando);
-	return operando+signo*otroOperando;
 }
 
 //Error
