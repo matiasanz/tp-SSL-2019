@@ -1,11 +1,11 @@
 # ifndef _DOMINIO_
 # define _DOMINIO_
 
-  #include <stdio.h>
-  #include <string.h>
-  #include <time.h>
-  #include <windows.h>
-  #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <windows.h>
+#include <stdbool.h>
 
 //variable
 typedef struct{
