@@ -1,0 +1,1 @@
+resultado1570:=(unNumero+otro_numero)83-raizDe(7pi);

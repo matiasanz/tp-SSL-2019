@@ -1,0 +1,10 @@
+INICIO;
+ESCRIBIR unId 100;
+LEER unId;
+ESCRIBIR Id2 50;
+LEER Id2;
+DiFeRenCiA:=unId-Id2;
+LEER DiFeRenCiA;
+suma:=unId+Id2;
+LEER suma;
+FIN;
