@@ -1,0 +1,9 @@
+# Flex
+*.yy.c
+
+# Bison
+*.tab.c
+*.tab.h
+
+# Ejecutable
+*.exe
