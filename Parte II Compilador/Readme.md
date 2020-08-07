@@ -1,4 +1,4 @@
-![Enunciado](../Enunciados/TP4.png) 
+![Enunciado](../Enunciados/TP4.PNG) 
 
 ## Comandos para compilar con flex y byson desde windows:
 
