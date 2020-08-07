@@ -1,6 +1,6 @@
 %{
     #include<stdlib.h>
-	#include"bison.tab.h"
+	#include"parser.tab.h"
     #include<string.h>
 
 %}
