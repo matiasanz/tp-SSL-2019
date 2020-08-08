@@ -12,6 +12,39 @@
 	Año: 2019
 */
 
+void mostrar_lexema(char*lexema, int length);
+
+int leerLexema(FILE*, char lexema[], int*length, int*estado);
+
+int reconocerToken(int estado);
+
+//Programa Principal
+int main(int argc, char *argv[]) 
+{
+	FILE*archivo = fopen("microcodigo.txt", "r+b"); //No acepta espacios.
+	char caracter, lexema[25];
+	int estado=0, length=0;
+	
+	int hayMasLexemas;
+	while((hayMasLexemas=leerLexema(archivo, lexema, &length, &estado)))
+	{
+		mostrar_lexema(lexema, length);
+		int reconocimientoExitoso = reconocerToken(estado);
+		if(!reconocimientoExitoso)
+		{
+			fclose(archivo);
+			return 1;	//En caso de no reconocer un token se detiene el programa, ya que podría ocasionar una mala lectura
+		}
+		
+		length=0, estado=0;
+		
+	} 
+	
+	fclose(archivo);
+	return 0;
+}
+
+
 //funciones auxiliares
 int esLetra(char caracter)
 {
@@ -33,6 +66,11 @@ char* substring(char cadena[], int length)
 	return subcadena;
 }
 
+void mostrar_lexema(char*lexemaConBasura, int length){
+	char* lexema = substring(lexemaConBasura, length); 	
+	printf(lexema);
+	free(lexema);
+}
 	
 //Automata Finito Deterministico Reconocedor de Lexemas
 	#define Error 12
@@ -139,30 +177,3 @@ int reconocerToken(int key)
 		
 	return 1;
 }
-
-//Programa Principal
-int main(int argc, char *argv[]) 
-{
-	FILE*archivo = fopen("microcodigo.txt", "r+b"); //No acepta espacios.
-	char caracter, lexema[25];
-	int estado=0, length=0;
-	
-	int hayMasLexemas;
-	while((hayMasLexemas=leerLexema(archivo, lexema, &length, &estado)))
-	{
-		printf("%s ", substring(lexema, length));
-		int reconocimientoExitoso = reconocerToken(estado);
-		if(!reconocimientoExitoso)
-		{
-			fclose(archivo);
-			return 1;	//En caso de no reconocer un token se detiene el programa, ya que podría ocasionar una mala lectura
-		}
-		
-		length=0, estado=0;
-		
-	} 
-	
-	fclose(archivo);
-	return 0;
-}
-

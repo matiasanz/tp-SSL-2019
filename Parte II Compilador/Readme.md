@@ -1,15 +1,1 @@
-![Enunciado](../Enunciados/TP4.PNG) 
-
-## Comandos para compilar con flex y byson desde windows:
-
-// traduce el codigo de flex a C, creando el archivo lex.yy.c
-    flex scanner.l
-
-// traduce el codigo de bison a C, creando los archivos bison.tab.c y bison.tab.h
-    bison -d bison.y	
-
-//crea archivo ejecutable
-    gcc lex.yy.c tabla_de_valores.c bison.tab.c -o ejecutable.exe 
-
-//Ejecutar programa
-    ejecutable.exe
+![Enunciado](../Imagenes/enunciadoTP4.PNG) 
