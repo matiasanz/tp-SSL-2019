@@ -1,5 +1,5 @@
 %{
-  #include "tabla_de_valores.h"
+  #include "tabla_valores.h"
 
   extern FILE*yyin;
   extern int yylex(void);

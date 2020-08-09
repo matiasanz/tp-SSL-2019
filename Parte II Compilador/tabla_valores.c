@@ -1,4 +1,4 @@
-# include "tabla_de_valores.h"
+# include "tabla_valores.h"
 
 variable variableCreate(char* identificador, int valor){
 	return (variable){identificador, valor};

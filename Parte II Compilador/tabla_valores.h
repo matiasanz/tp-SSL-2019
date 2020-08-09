@@ -1,5 +1,5 @@
-# ifndef _DOMINIO_
-# define _DOMINIO_
+# ifndef _TABLA_VALORES_
+# define _TABLA_VALORES_
 
 #include <stdio.h>
 #include <string.h>
@@ -24,7 +24,6 @@ typedef nodoVariable entradaDeTabla;
 
   entradaDeTabla* findEntrada(char*identificador, repositorioDeVariables*);
 
-  void declararVariable(char*identificador, int valor, repositorioDeVariables**);
   void asignarVariable(char*identificador, int nuevoValor, repositorioDeVariables**);
   void leer(char*identificador, repositorioDeVariables*);
 
